@@ -1,4 +1,6 @@
 const http = require("http")
+const https = require("https")
+const fs = require("fs")
 const express = require("express")
 const cors = require("cors")
 require("./email_handler")
@@ -9,6 +11,10 @@ const emiter = require("./emiiter")
 
 app.use(cors())
 app.use(express.json())
+
+app.use('/',(req,res)=>{
+res.send("welcome to my email server ")
+})
 
 
 app.post("/send",(req,res)=>{
@@ -42,7 +48,7 @@ app.post("/sendHtml",(req,res)=>{
 
 
 const server = http.createServer(app)
-const httpsServer = http.createServer({
+const httpsServer = https.createServer({
     key: fs.readFileSync("./cert/key.pem","utf-8"),
     cert: fs.readFileSync("./cert/cert.pem","utf-8")
     },app)
