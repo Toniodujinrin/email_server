@@ -12,12 +12,14 @@ const emiter = require("./emiiter")
 app.use(cors())
 app.use(express.json())
 
-app.use('/',(req,res)=>{
+app.get('/',(req,res)=>{
 res.send("welcome to my email server ")
 })
 
 
+
 app.post("/send",(req,res)=>{
+
     const err = Validator.validateEMail(req.body)
     if(err){
          res.status(400).send(err)

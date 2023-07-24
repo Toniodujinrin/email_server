@@ -4,6 +4,7 @@ const emmiter = require("./emiiter")
 
 emmiter.on("sendMail",(args)=>{
     const {receiver, from, subject, text} = args[0]
+    
     res =args[1]
     let transporter = nodemailer.createTransport({
         service:"gmail", 
@@ -24,7 +25,11 @@ emmiter.on("sendMail",(args)=>{
            console.log(err)
            res.status(500).send("could not send email")
         }
-        else(res.status(200).send(`message sent to ${receiver} `))
+        else{
+            console.log(`email sent to ${receiver}`)
+            res.status(200).send(`message sent to ${receiver} `)
+
+        }
     })
 })
 
@@ -52,7 +57,10 @@ emmiter.on("sendHtml",(args)=>{
            console.log(err)
            res.status(500).send("could not send email")
         }
-        else(res.status(200).send(`message sent to ${receiver} `))
+        else {
+            console.log(`message sent ${receiver}`)
+            res.status(200).send(`message sent to ${receiver} `)
+        }
     })
 
 })
